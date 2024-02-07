@@ -1,4 +1,4 @@
-import { Application, Sprite, Assets, Container } from "pixi.js";
+import { Application, Sprite, Assets, Container, Graphics } from "pixi.js";
 import { Scene } from "./Scene";
 
 const app = new Application({
@@ -24,3 +24,14 @@ await Assets.loadBundle("tank-medium");
 
 const scene = new Scene(app.screen.height, app.screen.width);
 app.stage.addChild(scene);
+
+const runGame = () => {
+  const marker = new Graphics();
+  marker.beginFill(0xff0000, 1);
+  marker.drawCircle(0, 0, 10);
+  marker.endFill();
+  app.stage.position.set(1700 / 2, 700 / 2);
+  app.stage.addChild(marker);
+};
+
+runGame();
