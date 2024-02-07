@@ -13,6 +13,6 @@ export class Scene extends Container {
     this.screenHight = screenHight;
     this.screenWidth = screenWidth;
 
-    this.addChild(this.myTank.myTankContainer);
+    this.addChild(this.myTank.view);
   }
 }
