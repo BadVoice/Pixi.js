@@ -1,27 +1,7 @@
 import { Assets } from "pixi.js";
 
-import appTextures, { allTexturesKeys } from "./textures";
-
-//Превращяем объект с путями в массив
-Object.entries(appTextures).forEach(([key, value]) => {
-  Assets.add(key, value);
+Assets.addBundle("tank-medium", {
+  hyllA07: "./public/sprites/Hulls_Color_A/Hull_07.png",
+  weaponA08: "./public/sprites/Weapon_Color_A/Gun_08.png",
+  trackA2: "./public/sprites/Tracks/Track_2_A.png",
 });
-
-const textures = new Map(); //кеш texture
-
-export const loadAssets = (onProgress) => {
-  const keys = Object.entries(allTexturesKeys).map(([key, value]) => value);
-  Assets.load([...keys], onProgress).then((data) => {
-    Object.entries(data).forEach(([key, value]) => {
-      textures.set(key, value);
-    });
-    onProgress("all");
-  });
-};
-
-export const getTextures = (id) => {
-  if (textures.has(id)) {
-    return textures.get(id);
-  }
-  return null;
-};
