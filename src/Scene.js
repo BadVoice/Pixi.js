@@ -1,29 +1,21 @@
-import { Container, Sprite } from "pixi.js";
+import { AnimatedSprite, Container, Sprite } from "pixi.js";
+import { Tank } from "./Tank";
 
 export class Scene extends Container {
   screenWidth;
   screenHight;
 
-  myTankHull = new Sprite();
-  myTankWeapon = new Sprite();
-  myTankContainer = new Container();
+  myTank = new Tank();
+
   constructor(screenHight, screenWidth) {
     super();
 
     this.screenHight = screenHight;
     this.screenWidth = screenWidth;
 
-    this.myTankHull = Sprite.from("./sprites/Hulls_Color_A/Hull_07.png");
-    this.myTankHull.anchor.set(0.5);
-    this.myTankHull.rotation = 1.57;
+    this.myTank.myTankContainer.x = this.screenWidth / 3;
+    this.myTank.myTankContainer.y = this.screenHight / 2;
 
-    this.myTankWeapon = Sprite.from("./sprites/Weapon_Color_A/Gun_08.png");
-    this.myTankWeapon.anchor.set(0.5);
-    this.myTankWeapon.rotation = 1.57;
-
-    this.myTankContainer.x = this.screenWidth / 3;
-    this.myTankContainer.y = this.screenHight / 2;
-    this.myTankContainer.addChild(this.myTankHull, this.myTankWeapon);
-    this.addChild(this.myTankContainer);
+    this.addChild(this.myTank.myTankContainer);
   }
 }
