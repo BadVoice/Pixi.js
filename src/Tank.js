@@ -22,37 +22,59 @@ export const createSprite = (
   rotation = 0
 ) => {
   const sprite = new Sprite(Texture.from(texturesName));
+  console.log(texturesName);
   sprite.position.copyFrom(position);
   sprite.anchor.copyFrom(anchor);
   sprite.rotation = rotation;
+  if (!sprite) {
+    console.error(`Ошибка загрузки текстуры ${sprite}`);
+  } else {
+    console.log(`Текстура ${sprite} успешно загружена`);
+  }
   return sprite;
 };
 
 export class Tank {
   constructor() {
     this._view = new Container();
-    this._tracksLeft = createAnimatedSprite(["trackA2", "trackB2"], {
-      x: 0,
-      y: -60,
-    });
+    this._tracksLeft = createAnimatedSprite(
+      ["./sprites/Tracks/Track_2_A.png", "./sprites/Tracks/Track_2_B.png"],
+      {
+        x: 0,
+        y: -60,
+      }
+    );
     this._tracksLeft.play();
     this._tracksLeft.animationSpeed = 0.15;
     this._tracksLeft.rotation = 1.57;
 
-    this._tracksRight = createAnimatedSprite(["trackA2", "trackB2"], {
-      x: 0,
-      y: 60,
-    });
+    this._tracksRight = createAnimatedSprite(
+      ["./sprites/Tracks/Track_2_A.png", "./sprites/Tracks/Track_2_B.png"],
+      {
+        x: 0,
+        y: 60,
+      }
+    );
     this._tracksRight.play();
     this._tracksRight.animationSpeed = 0.15;
     this._tracksRight.rotation = 1.57;
 
     this._view.addChild(this._tracksLeft, this._tracksRight);
     this.view.addChild(
-      createSprite("hullA07", { x: 0, y: 0 }, { x: 0.5, y: 0.5 }, 1.57)
+      createSprite(
+        "./public/sprites/Hulls_Color_B/Hull_07.png",
+        { x: 0, y: 0 },
+        { x: 0.5, y: 0.5 },
+        1.57
+      )
     );
     this.view.addChild(
-      createSprite("weaponA08", { x: 0, y: 0 }, { x: 0.5, y: 0.5 }, 1.57)
+      createSprite(
+        "./public/sprites/Weapon_Color_B/Gun_07.png",
+        { x: 0, y: 0 },
+        { x: 0.5, y: 0.5 },
+        1.57
+      )
     );
   }
 

@@ -1,4 +1,5 @@
 import App from "./App";
-import { Scene } from "./Scene";
 
-App;
+const myApp = new App();
+
+myApp.init();

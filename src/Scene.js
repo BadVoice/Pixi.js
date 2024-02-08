@@ -5,16 +5,14 @@ export class Scene extends Container {
   screenHight;
   screenWidth;
   marker = new Graphics();
+  myTank;
 
-  myTank = new Tank();
-
-  constructor(screenHight, screenWidth, marker) {
+  constructor(screenHight, screenWidth) {
     super();
 
     this.screenHight = screenHight;
     this.screenWidth = screenWidth;
-    this.marker = marker;
-
+    this.myTank = new Tank();
     this.addChild(this.myTank.view, this.marker);
   }
 }
