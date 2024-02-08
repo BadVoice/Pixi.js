@@ -35,7 +35,11 @@ export const createSprite = (
 };
 
 export class Tank {
-  constructor() {
+  constructor(score, updateScoreCallback) {
+    this.enemyTankHealth = 100;
+    this.score = score;
+    this.updateScoreCallback = updateScoreCallback;
+
     this._view = new Container();
     this._tracksLeft = createAnimatedSprite(
       ["./sprites/Tracks/Track_2_A.png", "./sprites/Tracks/Track_2_B.png"],
@@ -76,9 +80,28 @@ export class Tank {
         1.57
       )
     );
+
+    this._view.on("pointertap", this._onClicky, this);
+    this._view.eventMode = "dynamic";
   }
 
   get view() {
     return this._view;
+  }
+
+  _onClicky(event) {
+    console.log("Click");
+    this.enemyTankHealth -= 10;
+
+    if (this.enemyTankHealth <= 0) {
+      this.enemyTankHealth = 100;
+      this.score += 100;
+      console.log(this.score);
+      console.log(
+        "Противник уничтожен! Получено 100 очков. Общий счет: " + this.score
+      );
+
+      this.updateScoreCallback(this.score);
+    }
   }
 }
