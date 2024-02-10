@@ -6,6 +6,7 @@ Assets.addBundle("tank-medium", {
   trackA2: "./public/sprites/Tracks/Track_2_A.png",
 
   trackB2: "./public/sprites/Tracks/Track_2_B.png",
-  weaponB08: "./public/sprites/Weapon_Color_B/Gun_07.png",
+  weaponB07A: "./public/sprites/Weapon_Color_B/Gun_07_A.png",
+  towerB07A: "./public/sprites/Weapon_Color_B/Gun_07_B.png",
   hullB07: "./public/sprites/Hulls_Color_B/Hull_01.png",
 });

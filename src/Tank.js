@@ -36,11 +36,14 @@ export const createSprite = (
 
 export class Tank {
   constructor(score, updateScoreCallback) {
-    this.enemyTankHealth = 100;
+    this.enemyTankHealth = 100; // Здоровье противника mock
     this.score = score;
     this.updateScoreCallback = updateScoreCallback;
 
     this._view = new Container();
+    this._weaponContainer = new Container();
+    this._hullContainer = new Container();
+
     this._tracksLeft = createAnimatedSprite(
       ["./sprites/Tracks/Track_2_A.png", "./sprites/Tracks/Track_2_B.png"],
       {
@@ -48,7 +51,6 @@ export class Tank {
         y: -60,
       }
     );
-    this._tracksLeft.play();
     this._tracksLeft.animationSpeed = 0.15;
     this._tracksLeft.rotation = 1.57;
 
@@ -59,12 +61,11 @@ export class Tank {
         y: 60,
       }
     );
-    this._tracksRight.play();
     this._tracksRight.animationSpeed = 0.15;
     this._tracksRight.rotation = 1.57;
 
-    this._view.addChild(this._tracksLeft, this._tracksRight);
-    this.view.addChild(
+    this._hullContainer.addChild(this._tracksLeft, this._tracksRight);
+    this._hullContainer.addChild(
       createSprite(
         "./public/sprites/Hulls_Color_B/Hull_07.png",
         { x: 0, y: 0 },
@@ -72,21 +73,53 @@ export class Tank {
         1.57
       )
     );
-    this.view.addChild(
+
+    this._weaponContainer.addChild(
       createSprite(
-        "./public/sprites/Weapon_Color_B/Gun_07.png",
+        "./public/sprites/Weapon_Color_B/Gun_07_B.png",
         { x: 0, y: 0 },
         { x: 0.5, y: 0.5 },
         1.57
       )
     );
 
+    this._weaponContainer.addChild(
+      createSprite(
+        "./public/sprites/Weapon_Color_B/Gun_07_A.png",
+        { x: 110, y: 0 },
+        { x: 0.5, y: 0.5 },
+        1.57
+      )
+    );
+    this._weaponContainer.rotation = -0.1;
+    this._hullContainer.rotation = 1.11;
+
     this._view.on("pointertap", this._onClicky, this);
     this._view.eventMode = "dynamic";
+
+    this._view.addChild(this._hullContainer, this._weaponContainer);
   }
 
   get view() {
     return this._view;
+  }
+
+  rotateTowerBy(angle) {
+    this._weaponContainer.rotation += angle;
+  }
+
+  rotateBodyBy(angle) {
+    this._hullContainer.rotation += angle;
+  }
+
+  startTracks() {
+    this._tracksLeft.play();
+    this._tracksRight.play();
+  }
+
+  stopTracks() {
+    this._tracksLeft.stop();
+    this._tracksRight.stop();
   }
 
   _onClicky(event) {

@@ -24,10 +24,12 @@ export class Scene extends Container {
 
     this.scoreContainer = new Container();
     this.scoreText = new Text("Score: " + initialScore, { fill: 0xffffff });
-    this.scoreText.position.set(-50, -202);
+    this.scoreText.position.set(-50, -300);
 
     this.scoreContainer.addChild(this.scoreText);
 
     this.addChild(this.myTank.view, this.marker, this.scoreContainer);
+    console.log("Сцена создана");
+    window["TANK"] = this.myTank;
   }
 }
